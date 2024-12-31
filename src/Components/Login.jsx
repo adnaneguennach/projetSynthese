@@ -1,30 +1,56 @@
-import React,{useState, useEffect} from 'react'
+import React, { useState } from 'react';
+import loginImg from '../assets/loginpage.jpg';
+import { useNavigate } from 'react-router-dom';
 
-export default function Login(){
+const Login = () => {
+    const [formData, setFormData] = useState({});
+    const navigate = useNavigate();
 
-    return(
-        <>
-        
-        <div className=" mx-auto bg-gray-500">
-            <div className="flex justify-center items-center h-screen">
-                <div className="bg-white p-8 rounded-lg shadow-lg w-1/4">
-                    <h1 className="text-3xl font-bold text-center">Login</h1>
-                    <form className="mt-4">
-                        <div className="mb-4">
-                            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                            <input type="email" name="email" id="email" placeholder="Your Email" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (formData.email === "root@gmail.com" && formData.password === "root") {
+            navigate('/home');
+        }
+    };
+
+    return (
+        <div className="loginContainer flex w-full h-screen">
+            <div className="w-2/4 h-full relative flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: `url(${loginImg})` }}>
+                <div className="absolute inset-0 bg-black opacity-50"></div>
+                <div className="absolute top-4 left-4 z-10">
+                    {/* <img src="" alt="Logo" className="h-12" /> */}
+                </div>
+                <div className="relative z-10 text-white text-center px-8">
+                    <h1 className="text-4xl text-left font-bold mb-3">WELCOME</h1>
+                    <p className="text-lg text-left my-5">A WebApp that holds all the functionalities to manage your gym <br /> in a single click.</p>
+                    <div className="flex justify-left">
+                        <a href="mailto:adnanegu5@gmail.com" className="btn bg-blue-400 p-2 text-[15px] px-3 rounded">Need Help?</a>
+                    </div>
+                </div>
+            </div>
+            <div className="w-2/4 h-full bg-white flex items-center justify-center">
+                <div className="w-full max-w-lg p-8">
+                    <h1 className="text-4xl text-left font-bold mb-7 text-blue-400">LOGIN</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div className="input flex flex-col mb-4">
+                            <label htmlFor="email" className="mb-2 text-[14px] text-gray-500">Email</label>
+                            <input type="email" name="email" onChange={handleChange} id="email" placeholder="Email" className="outline-none p-2 border rounded" />
                         </div>
-                        <div className="mb-4">
-                            <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Your Password" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                        <div className="input flex flex-col mb-6">
+                            <label htmlFor="password" className="mb-2 text-[14px] text-gray-500">Password</label>
+                            <input type="password" name="password" onChange={handleChange} id="password" placeholder="Password" className="outline-none p-2 border rounded" />
                         </div>
-                        <div className="mb-4 flex justify-center">
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none w-1/3 focus:shadow-outline" type="button">Login</button>
-                        </div>
+                        <button className="btn bg-blue-400 text-white p-2 rounded w-full hover:bg-blue-700" type="submit">Login</button>
                     </form>
                 </div>
             </div>
         </div>
-        </>
-    )
-}
+    );
+};
+
+export default Login;
