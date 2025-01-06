@@ -4,6 +4,7 @@ import './index.css';
 import App from './App.jsx';
 import Home from './Components/Home.jsx';
 import Login from './Components/Login.jsx';
+import Members from './Components/Members.jsx';
 import Sidebar from './Components/Sidebar.jsx';
 import { legacy_createStore } from 'redux'
 import reducer from './reducer.jsx'
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/members" element={<Members />} />
         </Routes>
       </div>
     </BrowserRouter>
